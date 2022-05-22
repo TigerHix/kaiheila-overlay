@@ -11,11 +11,14 @@ const options: Options = {
   nametag: true,
   nametag_margin_top: 40,
   nametag_margin_bottom: 40,
-  custom_names: {}
+  custom_names: {},
+  current_users: undefined
 }
 
 ws.onmessage = e => {
+  console.log(e.data)
   const parsed = JSON.parse(e.data)
+  console.log(parsed)
 
   // let users = []
   // for (let i = 0; i < parsed.current_users.length; i++) {
@@ -25,6 +28,14 @@ ws.onmessage = e => {
   // }
   // parsed.current_users = users
 
+  if (options.current_users) {
+    parsed.current_users = JSON.parse(JSON.stringify(options.current_users));
+    for (let user of parsed.current_users) {
+      if (parsed.talking_users.includes(user.id)) {
+        user.talking = true;
+      }
+    }
+  }
   data.value = parsed
 }
 
@@ -37,6 +48,7 @@ options.nametag = params.get('nametag') ? params.get('nametag')!.toLowerCase() =
 options.nametag_margin_top = params.get('nametag_margin_top') ? Number(params.get('nametag_margin_top')) : options.nametag_margin_top
 options.nametag_margin_bottom = params.get('nametag_margin_bottom') ? Number(params.get('nametag_margin_bottom')) : options.nametag_margin_bottom
 options.custom_names = params.get('custom_names') ? Object.fromEntries(params.get('custom_names')!.split(',').map(it => [it.split(':')[0], it.split(':')[1]])) : options.custom_names
+options.current_users = params.get('current_users') ? JSON.parse(params.get('current_users')!) : options.current_users
 
 console.log('Parsed options:')
 console.log(options)

@@ -32,7 +32,7 @@ const name = computed(() => props.options.custom_names[props.user.id] ?? props.u
           :alt="name"
         />
         <template v-if="options.nametag">
-          <div v-if="bottom" class="absolute nametag" v-bind:class="{ speaking: user.talking }" :style="{ bottom: options.nametag_margin_bottom + 'px' }">
+          <div v-if="bottom" class="absolute nametag text-center" v-bind:class="{ speaking: user.talking }" :style="{ bottom: options.nametag_margin_bottom + 'px' }">
             {{ name }}
           </div>
           <div v-else class="absolute nametag" v-bind:class="{ speaking: user.talking }" :style="{ top: '-' + options.nametag_margin_top + 'px' }">

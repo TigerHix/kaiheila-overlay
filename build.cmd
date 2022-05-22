@@ -1,7 +1,7 @@
 @echo off
 
 if "%~1" == "" goto :build
-if "%~1" == "-wsl" set wsl = "1"
+if "%~1" == "-wsl" set wsl=1
 
 :build
 

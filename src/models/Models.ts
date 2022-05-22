@@ -5,7 +5,8 @@ export interface Options {
     nametag: boolean
     nametag_margin_top: number
     nametag_margin_bottom: number,
-    custom_names: any
+    custom_names: any,
+    current_users?: User[]
 }
 
 export interface Payload {
@@ -16,5 +17,5 @@ export interface Payload {
 export interface User {
     id: string
     nickname: string
-    talking: boolean
+    talking?: boolean
 }
